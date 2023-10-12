@@ -11,12 +11,30 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 
+# ---------------------------- GLOBALS ------------------------------- #
+reps = 0
+
 
 # ---------------------------- TIMER RESET ------------------------------- #
-
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
-    count_down(1 * 60)
+
+    global reps
+    if reps < 8:
+        reps += 1
+
+        if reps == 8:
+            timer_label.config(text="Break", fg=RED)
+            count_down(LONG_BREAK_MIN * 60)
+            # count_down(4) # Testing
+        elif reps % 2 == 0:
+            timer_label.config(text="Break", fg=PINK)
+            count_down(SHORT_BREAK_MIN * 60)
+            # count_down(3) # Testing
+        else:
+            timer_label.config(text="Work", fg=GREEN)
+            count_down(WORK_MIN * 60)
+            # count_down(5) # Testing
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -33,6 +51,14 @@ def count_down(count):
     canvas.itemconfig(timer_text, text=time_remaining)
     if count > 0:
         window.after(1000, count_down, count - 1)
+    else:
+        # reps is a global variable.
+        # Add a check mark to the label after a work session is completed.
+        if reps % 2 != 0:
+            checks_text = check_marks_label.cget("text")
+            checks_text += "✔"
+            check_marks_label.config(text=checks_text)
+        start_timer()
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -54,7 +80,7 @@ start_button.grid(row=2, column=0)
 reset_button = Button(text="Reset", width=5)
 reset_button.grid(row=2, column=2)
 
-checks_label = Label(text="✔", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20, "normal"))
-checks_label.grid(row=3, column=1)
+check_marks_label = Label(text="", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20, "normal"))
+check_marks_label.grid(row=3, column=1)
 
 window.mainloop()
