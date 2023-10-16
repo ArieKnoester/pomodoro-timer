@@ -2,7 +2,7 @@
 
 A Pomodoro Timer application created as part of a Python course.
 In this lesson, students get more familiar with Tkinter and using
-methods which take *args and **kwargs. The image, tomato.png was 
+methods which take *args and **kwargs. The image, tomato.png, was 
 provided by the course.
 
 #### Note
