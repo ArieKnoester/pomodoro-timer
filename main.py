@@ -34,16 +34,16 @@ def start_timer():
 
         if reps == 8:
             timer_label.config(text="Break", fg=RED)
-            # count_down(LONG_BREAK_MIN * 60)
-            count_down(4)  # Testing
+            count_down(LONG_BREAK_MIN * 60)
+            # count_down(4)  # Testing
         elif reps % 2 == 0:
             timer_label.config(text="Break", fg=PINK)
-            # count_down(SHORT_BREAK_MIN * 60)
-            count_down(3)  # Testing
+            count_down(SHORT_BREAK_MIN * 60)
+            # count_down(3)  # Testing
         else:
             timer_label.config(text="Work", fg=GREEN)
-            # count_down(WORK_MIN * 60)
-            count_down(5)  # Testing
+            count_down(WORK_MIN * 60)
+            # count_down(5)  # Testing
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
